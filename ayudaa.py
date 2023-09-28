@@ -140,9 +140,9 @@ input_std = 127.5
 outname = output_details[0]['name']
 
 if ('StatefulPartitionedCall' in outname): # This is a TF2 model
-    boxes_idx, scores_idx = 1, 3
+    boxes_idx, scores_idx = 1, 0
 else: # This is a TF1 model
-    boxes_idx, scores_idx = 0, 1
+    boxes_idx, scores_idx = 0, 0
 
 # Loop over every image and perform detection
 for image_path in images:
