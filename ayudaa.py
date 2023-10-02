@@ -140,9 +140,9 @@ input_std = 127.5
 outname = output_details[0]['name']
 
 if ('StatefulPartitionedCall' in outname): # This is a TF2 model
-    boxes_idx, scores_idx = 1, 0
+    boxes_idx, classes_idx, scores_idx = 1, 3, 0
 else: # This is a TF1 model
-    boxes_idx, scores_idx = 0, 0
+    boxes_idx, classes_idx, scores_idx = 0, 1, 2
 
 # Loop over every image and perform detection
 for image_path in images:
@@ -164,6 +164,7 @@ for image_path in images:
 
     # Retrieve detection results
     boxes = interpreter.get_tensor(output_details[boxes_idx]['index'])[0] # Bounding box coordinates of detected objects
+    classes = interpreter.get_tensor(output_details[classes_idx]['index'])[0] # Class index of detected objects
     scores = interpreter.get_tensor(output_details[scores_idx]['index'])[0] # Confidence of detected objects
 
     detections = []
